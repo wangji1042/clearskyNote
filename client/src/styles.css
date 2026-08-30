@@ -1,0 +1,264 @@
+:root {
+  --sky-50: #f0f7ff;
+  --sky-100: #e0efff;
+  --sky-200: #baddff;
+  --sky-400: #4aa8ff;
+  --sky-500: #2b90f0;
+  --sky-600: #1a75d1;
+  --ink: #0f2540;
+  --ink-soft: #4a5f7a;
+  --line: #d8e6f5;
+  --danger: #e5484d;
+  --white: #ffffff;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--ink);
+  background: linear-gradient(160deg, #dbeeff 0%, #eef6ff 40%, #ffffff 100%);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--line);
+  padding: 20px 16px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  font-size: 28px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(140deg, var(--sky-400), var(--sky-600));
+  color: white;
+  box-shadow: 0 8px 20px rgba(43, 144, 240, 0.35);
+}
+
+.brand h1 {
+  font-size: 18px;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.brand p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  font-size: 14px;
+  outline: none;
+}
+
+.search:focus {
+  border-color: var(--sky-400);
+  box-shadow: 0 0 0 3px var(--sky-100);
+}
+
+.btn-new {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(140deg, var(--sky-500), var(--sky-600));
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 16px rgba(43, 144, 240, 0.3);
+}
+
+.btn-new:hover {
+  transform: translateY(-1px);
+}
+
+.note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 14px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.note-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.08s ease;
+}
+
+.note-item:hover {
+  border-color: var(--sky-200);
+}
+
+.note-item.active {
+  border-color: var(--sky-400);
+  box-shadow: 0 6px 18px rgba(43, 144, 240, 0.18);
+}
+
+.note-item-title {
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-item-preview {
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-item-date {
+  font-size: 11px;
+  color: var(--sky-600);
+  font-weight: 500;
+}
+
+/* Editor */
+.editor {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 40px;
+  overflow: hidden;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.save-status {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.btn-delete {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--danger);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-delete:hover {
+  background: #fff1f1;
+  border-color: #f5c2c3;
+}
+
+.editor-title {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding: 8px 0;
+}
+
+.editor-title::placeholder {
+  color: #a9bdd6;
+}
+
+.editor-content {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+  padding: 8px 0;
+  font-family: inherit;
+}
+
+.editor-content::placeholder {
+  color: #a9bdd6;
+}
+
+.editor-empty {
+  margin: auto;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.editor-empty-mark {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.editor-empty h2 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-weight: 600;
+}

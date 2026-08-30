@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+
+# Runtime data store
+server/data/*.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env / editor
+.env
+.env.local
+.DS_Store
+.vscode/
