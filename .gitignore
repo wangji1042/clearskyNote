@@ -1,0 +1,48 @@
+# ---------- 依赖 ----------
+node_modules/
+.vite/
+
+# ---------- 构建产物 ----------
+dist/
+src-tauri/target/
+src-tauri/gen/
+coverage/
+
+# ---------- 非本项目所用包管理器的锁文件（本项目用 npm，保留 package-lock.json）----------
+yarn.lock
+pnpm-lock.yaml
+
+# ---------- 缓存 / 增量编译 ----------
+*.tsbuildinfo
+.eslintcache
+
+# ---------- 本地环境变量 ----------
+.env
+.env.*
+!.env.example
+
+# ---------- Android 签名材料（禁止入库）----------
+src-tauri/android/keystore.properties
+src-tauri/android/*.jks
+src-tauri/android/*.keystore
+*.jks
+*.keystore
+
+# ---------- 编辑器 / IDE ----------
+.idea/
+.vscode/
+.history/
+*.swp
+*~
+
+# ---------- 操作系统 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 本地工具 / 日志 ----------
+.worktrees/
+.superpowers/
+*.log
+npm-debug.log*
+yarn-error.log*
