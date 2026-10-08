@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@vitejs/plugin-vue": ["./node_modules/@vitejs/plugin-vue/dist/index.d.ts"]
+    }
+  },
+  "include": ["vite.config.ts"]
+}

@@ -1,0 +1,223 @@
+@use "@/styles/variables" as v;
+
+// ─── Reset ────────────────────────────────────────────────
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(63, 161, 255, 0.15), transparent 28%),
+    radial-gradient(circle at top right, rgba(27, 86, 253, 0.12), transparent 24%),
+    linear-gradient(180deg, v.$color-bg-from 0%, v.$color-bg-to 100%);
+  color: v.$color-text;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+// ─── 通用：面板容器（BEM block: csn-panel）────────────────
+.csn-panel {
+  min-height: 0;
+  max-height: 100%;
+  height: 100%;
+  border: 1px solid v.$color-border-subtle;
+  border-radius: v.$radius-lg;
+  background: v.$color-surface-card;
+  backdrop-filter: blur(14px);
+  box-shadow: v.$panel-shadow;
+  overflow: hidden;
+}
+
+.csn-panel--padded {
+  padding: 18px;
+}
+
+.csn-panel--editor {
+  padding: 18px 18px 20px;
+}
+
+.csn-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+// ─── 通用：文字与按钮 ─────────────────────────────────────
+.csn-eyebrow {
+  margin: 0;
+  color: v.$color-text-muted;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.csn-btn {
+  border-radius: v.$radius-pill;
+  padding: 11px 16px;
+}
+
+.csn-btn--ghost {
+  background: rgba(227, 237, 252, 0.92);
+  color: #1b4ea8;
+}
+
+.csn-btn--primary {
+  background: linear-gradient(135deg, #1f62ff, #2b8eff);
+  color: white;
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.75;
+  }
+}
+
+.csn-input {
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius-md;
+  background: v.$color-surface;
+  color: v.$color-text;
+  outline: none;
+}
+
+.csn-input--search {
+  padding: 12px 16px;
+  width: 220px;
+}
+
+.csn-textarea {
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius-md;
+  background: v.$color-surface;
+  color: v.$color-text;
+  outline: none;
+}
+
+.csn-icon-btn {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: 700;
+  color: #999;
+  opacity: 0;
+  transition:
+    opacity v.$transition-fast,
+    color v.$transition-fast,
+    background v.$transition-fast;
+}
+
+.csn-icon-btn--delete {
+  font-size: 1rem;
+
+  &:hover {
+    color: white;
+    background: v.$color-danger;
+  }
+}
+
+.csn-icon-btn--rename {
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  &:hover {
+    color: #1b4ea8;
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.csn-icon-btn--rename-confirm {
+  font-size: 1rem;
+  font-weight: 800;
+  opacity: 1;
+
+  &:hover {
+    color: #0d6d3d;
+    background: rgba(210, 250, 230, 0.98);
+  }
+}
+
+.csn-icon-btn--import {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    display: block;
+  }
+
+  &:hover {
+    color: #1b4ea8;
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+mark {
+  background: #ffe58f;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.csn-empty,
+.csn-sync-error {
+  color: #7a3e3e;
+}
+
+// ─── 响应式 ────────────────────────────────────────────────
+@media (max-width: 1080px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #app {
+    min-height: 0;
+  }
+
+  .csn-input--search {
+    width: 100%;
+    max-width: none;
+  }
+
+  .csn-panel {
+    min-height: auto;
+  }
+}
+
+@media (hover: none) {
+  .csn-icon-btn--delete,
+  .csn-icon-btn--rename,
+  .csn-icon-btn--import {
+    opacity: 0.55;
+  }
+}

@@ -1,0 +1,24 @@
+// 全局设计 Token（供 style.scss 与各组件样式 @use）
+
+$color-bg-from: #f5f8fc;
+$color-bg-to: #eef3f9;
+$color-text: #10233c;
+$color-text-dark: #17304f;
+$color-text-muted: #55708f;
+$color-border: rgba(95, 122, 153, 0.25);
+$color-border-subtle: rgba(95, 122, 153, 0.14);
+$color-surface: rgba(255, 255, 255, 0.82);
+$color-surface-card: rgba(255, 255, 255, 0.76);
+$color-accent-start: #2267ff;
+$color-accent-end: #3f9cff;
+$color-item-bg: rgba(236, 243, 255, 0.85);
+$color-item-hover: rgba(222, 236, 255, 0.95);
+$color-danger: #e0483b;
+
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 24px;
+$radius-pill: 999px;
+
+$panel-shadow: 0 16px 40px rgba(21, 38, 59, 0.08);
+$transition-fast: 120ms ease;
