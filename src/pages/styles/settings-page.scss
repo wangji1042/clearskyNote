@@ -1,0 +1,79 @@
+@use "@/styles/variables" as v;
+
+.settings-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settings-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+a.settings-page__back {
+  align-self: flex-start;
+  text-decoration: none;
+}
+
+.settings-page__title {
+  margin: 4px 0 0;
+  font-size: 1.35rem;
+}
+
+.settings-page__card {
+  border: 1px solid v.$color-border-subtle;
+  border-radius: v.$radius-lg;
+  background: v.$color-surface-card;
+  backdrop-filter: blur(14px);
+  box-shadow: v.$panel-shadow;
+  padding: 22px 24px 26px;
+}
+
+.settings-page__section-title {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.settings-page__hint {
+  margin: 0 0 18px;
+  font-size: 0.88rem;
+  color: v.$color-text-muted;
+  line-height: 1.55;
+}
+
+.settings-page__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: none;
+}
+
+.settings-page__input {
+  padding: 12px 14px;
+  display: block;
+  width: 100%;
+}
+
+.csn-sync-error {
+  /** 同步失败错误提示文字 */
+  margin: 14px 0 0;
+  font-size: 0.88rem;
+  color: #d93025;
+  line-height: 1.45;
+}
+
+.csn-sync-success {
+  /** 同步成功反馈提示文字 */
+  margin: 14px 0 0;
+  font-size: 0.88rem;
+  color: #188038;
+  line-height: 1.45;
+}
+

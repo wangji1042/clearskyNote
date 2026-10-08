@@ -1,0 +1,326 @@
+@use "@/styles/variables" as v;
+
+.notes-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 0;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.notes-page__topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  flex-shrink: 0;
+
+  h1 {
+    margin: 4px 0 0;
+    font-size: 1.25rem;
+  }
+}
+
+.notes-page__topbar-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.notes-page__brand {
+  min-width: 0;
+}
+
+.notes-page__search {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.notes-page__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.notes-page__sync-btn {
+  /** 立即同步图标按钮：清晰边框与盒模型重置 */
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(27, 78, 168, 0.28);
+  background: rgba(227, 237, 252, 0.92);
+  box-shadow: 0 2px 6px rgba(27, 78, 168, 0.08);
+  color: #1b4ea8;
+  cursor: pointer;
+  transition:
+    border-color v.$transition-fast,
+    background v.$transition-fast,
+    color v.$transition-fast,
+    box-shadow v.$transition-fast;
+
+  &:hover {
+    /** 悬停高亮按钮边界与背景 */
+    border-color: rgba(27, 78, 168, 0.6);
+    background: rgba(215, 230, 252, 0.98);
+    color: #123d8c;
+    box-shadow: 0 2px 10px rgba(27, 78, 168, 0.14);
+  }
+
+  &--syncing {
+    /** 同步进行中旋转动效 */
+    opacity: 0.8;
+    cursor: wait;
+
+    .notes-page__sync-icon {
+      animation: csn-spin 1s linear infinite;
+    }
+  }
+}
+
+.notes-page__sync-icon {
+  /** 同步矢量图标尺寸，撑满按钮核心区域 */
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  flex-shrink: 0;
+  display: block;
+}
+
+@keyframes csn-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+a.notes-page__settings-link {
+  flex-shrink: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.notes-page__grid {
+  display: grid;
+  grid-template-columns: 260px 320px minmax(320px, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+
+  /** 面板由 display: contents 的容器包裹，需穿透一层约束到实际面板 */
+  > *,
+  > * > * {
+    min-height: 0;
+    max-height: 100%;
+  }
+}
+
+.notes-page--mobile {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.notes-page__topbar--mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.notes-page__mobile-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notes-page__mobile-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.notes-page__menu-btn {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(236, 243, 255, 0.95);
+  border: 1px solid rgba(95, 122, 153, 0.2);
+  box-shadow: 0 4px 12px rgba(21, 38, 59, 0.06);
+}
+
+.notes-page__menu-icon {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 1px;
+  background: v.$color-text-dark;
+  box-shadow:
+    0 6px 0 v.$color-text-dark,
+    0 12px 0 v.$color-text-dark;
+}
+
+.notes-page__grid--mobile-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  flex: none;
+  min-height: unset;
+}
+
+.notes-page--mobile .note-list,
+.notes-page--mobile .note-editor {
+  min-height: auto;
+}
+
+.notes-page__drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(21, 38, 59, 0.42);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.notes-page__drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 201;
+  width: min(300px, 88vw);
+  display: flex;
+  flex-direction: column;
+  background: rgba(252, 253, 255, 0.98);
+  border-right: 1px solid v.$color-border;
+  box-shadow: 12px 0 40px rgba(21, 38, 59, 0.12);
+  transform: translateX(-102%);
+  transition: transform 0.26s ease;
+
+  &--open {
+    transform: translateX(0);
+  }
+}
+
+.notes-page__drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid v.$color-border-subtle;
+  flex-shrink: 0;
+}
+
+.notes-page__drawer-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: v.$color-text-dark;
+}
+
+.notes-page__drawer-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: v.$color-text-muted;
+  background: rgba(236, 243, 255, 0.95);
+
+  &:hover {
+    color: v.$color-text-dark;
+  }
+}
+
+.notes-page__drawer-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 14px;
+  -webkit-overflow-scrolling: touch;
+
+  .sidebar-tree {
+    min-height: auto;
+    box-shadow: 0 8px 24px rgba(21, 38, 59, 0.06);
+  }
+}
+
+.notes-page__drawer-search {
+  margin-bottom: 14px;
+}
+
+.notes-page__drawer-search-label {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: v.$color-text-muted;
+}
+
+.notes-page__drawer-search-input {
+  width: 100%;
+  max-width: none;
+}
+
+.notes-page__drawer-footer {
+  flex-shrink: 0;
+  padding: 12px 14px 16px;
+  border-top: 1px solid v.$color-border-subtle;
+  background: rgba(252, 253, 255, 0.98);
+}
+
+a.notes-page__drawer-settings-btn {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+}
+
+@media (max-width: 1080px) {
+  .notes-page {
+    min-height: auto;
+  }
+
+  .notes-page__topbar,
+  .notes-page__grid {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .notes-page__topbar {
+    align-items: stretch;
+  }
+
+  .notes-page__grid {
+    flex: none;
+    min-height: unset;
+  }
+}
